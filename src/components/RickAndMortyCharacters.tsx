@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Column, useTable } from 'react-table';
 import Swal from "sweetalert2";
+import Modal from './Modal'; // Import the Modal component
 
 interface Info {
     count: number;
@@ -10,7 +11,7 @@ interface Info {
     prev: string | null;
 }
 
-interface CharacterData {
+export interface CharacterData {
     id: number;
     name: string;
     status: string;
@@ -41,6 +42,9 @@ const RickAndMortyCharacters = () => {
     const [data, setData] = useState<CharacterData[]>([]);
     const [info, setInfo] = useState<Info>({count: 0, pages: 0, next: null, prev: null});
     const [pageNumber, setPageNumber] = useState(0);
+    const [selectedCharacter, setSelectedCharacter] = useState<CharacterData | null>(null); // Track the selected character for editing
+    const [isModalOpen, setIsModalOpen] = useState(false); // Track the modal state
+
 
 
     useEffect(() => {
@@ -91,6 +95,16 @@ const RickAndMortyCharacters = () => {
                 Header: 'Gender',
                 accessor: 'gender',
             },
+            // Action column
+            {
+                Header: 'Actions',
+                Cell: ({ row }) => (
+                    <div>
+                        <button onClick={() => handleInfo(row.original)}>Info</button>
+                        <button onClick={() => handleDelete(row.original)}>Delete</button>
+                    </div>
+                ),
+            },
         ],
         []
     );
@@ -99,6 +113,16 @@ const RickAndMortyCharacters = () => {
     const canPreviousPage = pageNumber > 1;
     const nextPage = () => setPageNumber(pageNumber + 1);
     const previousPage = () => setPageNumber(pageNumber - 1);
+
+    const handleInfo = (character: CharacterData) => {
+        setSelectedCharacter(character); // Set the selected character
+        setIsModalOpen(true); // Open the modal
+    };
+
+    const handleDelete = (character: CharacterData) => {
+        // Handle delete action
+        console.log('Delete:', character);
+    };
 
     const {
         getTableProps,
@@ -147,6 +171,7 @@ const RickAndMortyCharacters = () => {
                     </button>
                     {' '}
                 </div>
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} character={selectedCharacter} /> {/* Render the modal component */}
             </div>
         </div>
     );
