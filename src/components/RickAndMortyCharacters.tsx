@@ -101,7 +101,7 @@ const RickAndMortyCharacters = () => {
                 Cell: ({ row }) => (
                     <div>
                         <button onClick={() => handleInfo(row.original)}>Info</button>
-                        <button onClick={() => handleDelete(row.original)}>Delete</button>
+                        {/*<button onClick={() => handleDelete(row.original)}>Delete</button>*/}
                     </div>
                 ),
             },
@@ -119,10 +119,10 @@ const RickAndMortyCharacters = () => {
         setIsModalOpen(true); // Open the modal
     };
 
-    const handleDelete = (character: CharacterData) => {
+   /* const handleDelete = (character: CharacterData) => {
         // Handle delete action
         console.log('Delete:', character);
-    };
+    };*/
 
     const {
         getTableProps,
