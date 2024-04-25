@@ -3,27 +3,52 @@ import axios from 'axios';
 import { Column, useTable } from 'react-table';
 import Swal from "sweetalert2";
 
-interface Character {
+interface Info {
+    count: number;
+    pages: number;
+    next: string | null;
+    prev: string | null;
+}
+
+interface CharacterData {
     id: number;
     name: string;
     status: string;
     species: string;
     type: string;
     gender: string;
+    origin: {
+        name: string;
+        url: string;
+    };
+    location: {
+        name: string;
+        url: string;
+    };
+    image: string;
+    episode: string[];
+    url: string;
+    created: string;
 }
 
+interface CharacterApiResponse {
+    info: Info;
+    results: CharacterData[];
+}
+
+
 const RickAndMortyCharacters = () => {
-    const [data, setData] = useState<Character[]>([]);
-    const [info, setInfo] = useState<Character[]>([]);
+    const [data, setData] = useState<CharacterData[]>([]);
+    const [info, setInfo] = useState<Info>({count: 0, pages: 0, next: null, prev: null});
     const [pageNumber, setPageNumber] = useState(0);
 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<Character[]>(`https://rickandmortyapi.com/api/character/?page=${pageNumber + 1}`);
-                if (response.data.length === 0) {
-                    Swal.fire({
+                const response = await axios.get<CharacterApiResponse>(`https://rickandmortyapi.com/api/character/?page=${pageNumber + 1}`);
+                if (response.data.results.length === 0) {
+                    await Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'No data found.'
@@ -40,7 +65,7 @@ const RickAndMortyCharacters = () => {
         fetchData();
     }, [pageNumber]);
 
-    const columns: Column<Character>[] = React.useMemo(
+    const columns: Column<CharacterData>[] = React.useMemo(
         () => [
             {
                 Header: 'ID',
@@ -81,7 +106,7 @@ const RickAndMortyCharacters = () => {
         headerGroups,
         rows,
         prepareRow,
-    } = useTable<Character>({ columns, data });
+    } = useTable<CharacterData>({ columns, data });
 
     return (
         <div>
