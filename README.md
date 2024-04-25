@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
+# Rick and Morty Characters App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application that fetches and displays information about characters from the Rick and Morty TV show using the [Rick and Morty API](https://rickandmortyapi.com/).
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fetches character data from the Rick and Morty API.
+- Displays character information such as name, status, species, type, and gender.
+- Allows users to view detailed information about each character in a modal.
+- Supports pagination to navigate through multiple pages of characters.
+- Provides a responsive design for a seamless user experience on different devices.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
+   https://github.com/Asilvam/base2-test-front.git
+2. Navigate to the project directory:
+   ```bash
+   cd base2-test-front
+   ```
+3. Install the dependencies:
+   ```bash
+    npm install
+    ```
+4. Start the application:
+    ```bash
+    npm run dev
+    ```
 
-- Configure the top-level `parserOptions` property like this:
+5. Open your browser and go to [http://localhost:5173](http://localhost:5173) to view the app.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Technologies Used
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- React
+- Axios
+- Material-UI
+- TypeScript
+
+## Contributing
+
+Contributions are welcome! If you have any ideas, enhancements, or bug fixes, please submit a pull request. For major changes, please open an issue first to discuss the changes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
