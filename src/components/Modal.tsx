@@ -1,22 +1,5 @@
 import React from 'react';
 import {CharacterData} from './RickAndMortyCharacters'; // Import the CharacterData type
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    makeStyles
-} from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-    image: {
-        width: '100%',
-        height: 'auto',
-        marginBottom: theme.spacing(2),
-    },
-}));
 
 interface ModalProps {
     character: CharacterData | null,
@@ -24,31 +7,23 @@ interface ModalProps {
     onClose?: () => void
 }
 
-const Modal: React.FC<ModalProps> = ({character, isOpen, onClose}) => {
-    const classes = useStyles();
-
-    if (!character) return null;
+const Modal: React.FC<ModalProps> = ({ character, isOpen, onClose }) => {
+    if (!character || !isOpen) return null;
 
     return (
-        <Dialog open={isOpen} onClose={() => {
-        }}>
-            <DialogTitle>{character.name}</DialogTitle>
-            <DialogContent>
-                <img src={character.image} alt={character.name} className={classes.image}/>
-                <DialogContentText>
-                    Status: {character.status}<br/>
-                    Species: {character.species}<br/>
-                    Type: {character.type}<br/>
-                    Gender: {character.gender}<br/>
-                    {/* Add more details as needed */}
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose} color="primary">
-                    Close
-                </Button>
-            </DialogActions>
-        </Dialog>
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="bg-black p-8 max-w-md mx-auto rounded-md shadow-md">
+                    <h2 className="text-lg font-bold mb-4">{character.name}</h2>
+                    <img src={character.image} alt={character.name} className="w-full h-auto mb-4" />
+                    <p>Status: {character.status}</p>
+                    <p>Species: {character.species}</p>
+                    <p>Type: {character.type}</p>
+                    <p>Gender: {character.gender}</p>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onClick={onClose}>Close</button>
+                </div>
+            </div>
+        </div>
     );
 };
 
