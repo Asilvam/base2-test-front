@@ -41,7 +41,7 @@ interface CharacterApiResponse {
 const RickAndMortyCharacters = () => {
     const [data, setData] = useState<CharacterData[]>([]);
     const [info, setInfo] = useState<Info>({count: 0, pages: 0, next: null, prev: null});
-    const [pageNumber, setPageNumber] = useState(0);
+    const [pageNumber, setPageNumber] = useState(1);
     const [selectedCharacter, setSelectedCharacter] = useState<CharacterData | null>(null); // Track the selected character for editing
     const [isModalOpen, setIsModalOpen] = useState(false); // Track the modal state
 
