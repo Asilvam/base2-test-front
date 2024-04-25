@@ -50,7 +50,7 @@ const RickAndMortyCharacters = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<CharacterApiResponse>(`https://rickandmortyapi.com/api/character/?page=${pageNumber + 1}`);
+                const response = await axios.get<CharacterApiResponse>(`https://rickandmortyapi.com/api/character/?page=${pageNumber}`);
                 if (response.data.results.length === 0) {
                     await Swal.fire({
                         icon: 'error',
