@@ -37,8 +37,8 @@ interface CharacterApiResponse {
     results: CharacterData[];
 }
 
-const apiUrl = process.env.REACT_APP_API_URL;
-console.log('API URL:', apiUrl);
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
+// console.log('API URL:', apiUrl);
 
 const RickAndMortyCharacters = () => {
     const [data, setData] = useState<CharacterData[]>([]);
@@ -52,7 +52,7 @@ const RickAndMortyCharacters = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<CharacterApiResponse>(`${apiUrl}?page=${pageNumber}`);
+                const response = await axios.get<CharacterApiResponse>(`${apiUrl}${pageNumber}`);
                 if (response.data.results.length === 0) {
                     await Swal.fire({
                         icon: 'error',
